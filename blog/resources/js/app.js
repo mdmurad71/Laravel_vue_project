@@ -6,7 +6,8 @@ require('./bootstrap');
 import { createApp } from 'vue';
 import router from './routes';
 
-
+import User from './Helper/User';
+window.User = User
 
 
 

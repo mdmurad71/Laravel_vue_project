@@ -36,7 +36,7 @@
     <body class="antialiased">
             <div id="app">
 
-            <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+<nav class="navbar navbar-expand navbar-dark bg-dark static-top" id="topbar" style="display:none" v-show="$route.path === '/' || $route.path === '/register' ? false : true " >
 
 <a class="navbar-brand mr-1" href="index.html">Mohammad Murad</a>
 
@@ -64,7 +64,7 @@
 <div id="wrapper">
 
 <!-- Sidebar -->
-<ul class="sidebar navbar-nav">
+<ul class="sidebar navbar-nav" id="leftbar" v-show="$route.path === '/' || $route.path === '/register' ? false : true "  style="display: none;">
   <li class="nav-item active">
     <a class="nav-link">
       <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -75,7 +75,7 @@
    
   </li>
   <li class="nav-item">
-    <router-link to="/login" class="nav-link">
+    <router-link to="/" class="nav-link">
       <i class="fas fa-fw fa-chart-area"></i>
       <span>Login</span>
     </router-link>
@@ -105,23 +105,21 @@
   </li>
 
   <li class="nav-item">
-    <router-link to="/orders" class="nav-link">
+    <router-link to="/logout" class="nav-link">
       <i class="fas fa-fw fa-chart-area"></i>
-      <span>Order</span>
+      <span>Logout</span>
     </router-link>
   </li>
 
 </ul>
 
-<div id="content-wrapper" style="width: 1080px;">
+<div id="content-wrapper">
   <div class="container-fluid">
-  </div>
-
-<div class="mt-2 ml-3" id="nav">
-
 
   <router-view></router-view> 
-</div>
+  </div>
+
+
 </div>
 
             </div>
@@ -131,6 +129,17 @@
             <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 
             <script src="{{ asset('backend/vendor/jquery/jquery.min.js')}}"></script>
+
+  <script type="text/javascript">
+   let token = localStorage.getItem('token');
+   if (token) {
+    $("#topbar").css("display","");
+    $("#leftbar").css("display","");
+   }
+
+ </script>
+
+
   <script src="{{asset('backend/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
   <script src="{{ asset('backend/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
 

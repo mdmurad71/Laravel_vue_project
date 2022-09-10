@@ -4,6 +4,7 @@ import * as VueRouter from "vue-router";
 import Home from './component/Home'
 import Login from './component/Login'
 import Register from './component/Register'
+import Logout from './component/Logout'
 
 
 export const routes= [
@@ -14,13 +15,19 @@ export const routes= [
     },
 
     {
-        path: '/login',
+        path: '/',
         component: Login
     },
     {
         path: '/register',
         component: Register
     },
+
+    {
+        path: '/logout',
+        component: Logout
+    },
+   
    
 ];
 const router = createRouter({

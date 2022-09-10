@@ -3,16 +3,16 @@
     <div class="card card-login mx-auto mt-5">
       <div class="card-header">Login</div>
       <div class="card-body">
-        <form>
+        <form @submit.prevent="login">
           <div class="form-group">
             <div class="form-label-group">
-              <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="required" autofocus="autofocus">
+              <input type="email" id="inputEmail" class="form-control" placeholder="Email address" v-model="form.email" required="required" autofocus="autofocus">
               <label for="inputEmail">Email address</label>
             </div>
           </div>
           <div class="form-group">
             <div class="form-label-group">
-              <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="required">
+              <input type="password" id="inputPassword" class="form-control" placeholder="Password" v-model="form.password" required="required">
               <label for="inputPassword">Password</label>
             </div>
           </div>
@@ -24,7 +24,7 @@
               </label>
             </div>
           </div>
-          <a class="btn btn-primary btn-block" href="index.html">Login</a>
+          <button type="submit" class="btn btn-primary btn-block" >Login</button>
         </form>
         <div class="text-center">
           <router-link class="d-block small mt-3" to="/register">Register an Account</router-link>
@@ -35,6 +35,32 @@
 </template>
 <script>
 export default {
+
+  created(){
+    if(User.loggedIn()){
+      this.$router.push('/home')
+    }
+  },
+data() {
+  return {
+    form:{
+      email: "",
+      password: ""
+    }
+  }
+},
+
+methods: {
+  login(){
+    axios.post('/api/auth/login', this.form).then(res=>{
+      User.responseAfterLogin(res)
+      this.$router.push('/home')
+    } ).catch(error=>{
+
+    })
+  }
+},
+
     
 }
 </script>
