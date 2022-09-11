@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\RoomsController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -29,3 +31,12 @@ Route::group([
     Route::post('me', [AuthController::class, 'me']);
 
 });
+
+Route::get('/getData', [RoomsController::class, 'getData']);
+
+
+Route::get('/roomsData', [RoomsController::class, 'roomsData']);
+Route::post('/upload', [RoomsController::class, 'roomUpload']);
+Route::delete('/deleteData/{id}', [RoomsController::class, 'deleteData']);
+Route::get('/showData/{id}', [RoomsController::class, 'showData']);
+Route::post('/updateRoom/{id}', [RoomsController::class, 'updateRoom']);

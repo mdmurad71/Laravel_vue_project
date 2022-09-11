@@ -73,34 +73,23 @@
   </li>
 
    
-  </li>
-  <li class="nav-item">
-    <router-link to="/" class="nav-link">
-      <i class="fas fa-fw fa-chart-area"></i>
-      <span>Login</span>
-    </router-link>
-  </li>
+ 
 
 
     
+
+
   <li class="nav-item">
-    <router-link to="/register" class="nav-link">
+    <router-link to="/create" class="nav-link">
       <i class="fas fa-fw fa-chart-area"></i>
-      <span>Register</span>
+      <span>Add Room</span>
     </router-link>
   </li>
 
   <li class="nav-item">
-    <router-link to="/addProduct" class="nav-link">
+    <router-link to="/index" class="nav-link">
       <i class="fas fa-fw fa-chart-area"></i>
-      <span>Add Product</span>
-    </router-link>
-  </li>
-
-  <li class="nav-item">
-    <router-link to="/productList" class="nav-link">
-      <i class="fas fa-fw fa-chart-area"></i>
-      <span>product List</span>
+      <span>Room List</span>
     </router-link>
   </li>
 
