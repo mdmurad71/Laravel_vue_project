@@ -59,7 +59,7 @@ class RoomreserveController extends Controller
 
         $FcmToken = Roomreserve::whereNotNull('device_token')->pluck('device_token')->all();
             
-        $serverKey = 'AAAAG19Nq2g:APA91bEefKZP2yKmAAMTjTPhJuDyFLpUiVDE9Lv2siC8xuciFMXp13Fi9Q_YryCEsLpu0AlVdlr3_5ecFZHE3YoodQm1lpBUvySL9QSENUe5uBR5wnC8BXQfbHTQ_cswreuhvSdtzXUT'; // ADD SERVER KEY HERE PROVIDED BY FCM
+        $serverKey = ''; // ADD SERVER KEY HERE PROVIDED BY FCM
     
         $data = [
             "registration_ids" => $FcmToken,

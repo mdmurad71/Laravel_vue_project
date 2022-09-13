@@ -20143,7 +20143,7 @@ var _hoisted_13 = {
 };
 
 var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-  "class": "btn btn-outline-danger btn-lg text-center m-1 p-1",
+  "class": "btn btn-danger btn-lg text-center m-1 p-1",
   style: {
     "text-allign": "center"
   }
@@ -20170,7 +20170,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* TEXT */
     )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
       to: "/",
-      "class": "btn btn-outline-info btn-lg text-center m-1 p-1",
+      "class": "btn btn-info btn-lg text-center m-1 p-1",
       style: {
         "text-allign": "center"
       }

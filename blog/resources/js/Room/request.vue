@@ -1,5 +1,5 @@
 <template lang="">
-    <div class="container">
+<div class="container">
         <div class="row">
 
             <div class="col-lg-12 col-md-12">
@@ -23,7 +23,7 @@
                             </div>
                             <div class="col-lg-3 col-md-3 mt-3">
                                 <button  class="btn btn-danger btn-lg  text-center m-1 p-1" style="text-allign:center">Delete</button>
-                                <router-link to="/" class="btn btn-info btn-lg text-center m-1 p-1" style="text-allign:center">Home</router-link>
+                                <router-link to="/" class="btn btn-Success btn-lg text-center m-1 p-1" style="text-allign:center">Confirm</router-link>
 
                             </div>
 
@@ -42,34 +42,6 @@
 </template>
 <script>
 export default {
-
-    mounted(){
-            if (localStorage.getItem('phone')===null) {
-               this.$router.push('/login' )
-            } 
-        },
-
-        created() {
-            this.reserveList();
-        },
-
-    data() {
-        return {
-            lists:{}
-        }
-    },
-
-    methods: {
-        reserveList(){
-            let phone= localStorage.getItem('phone');
-            axios.get('/api/reserveList/'+phone).then(res=>{
-                this.lists= res.data;
-            }).catch();
-        }
-        
-    },
-
-    
     
 }
 </script>
