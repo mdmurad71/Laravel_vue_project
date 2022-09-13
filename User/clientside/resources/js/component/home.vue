@@ -1,5 +1,8 @@
 <template lang="">
     <div clas="container">
+        <nav class="navbar navbar-light bg-dark justify-content-center">
+            <router-link to="/list" class="btn btn-outline-success text-white text-center" style="text-allign:center">Reserve History</router-link>
+            </nav>
 <div class="row justify-content-center m-3 p-3">
     <template v-for="room in rooms" :key="room">
         <div class="col-lg-3 col-md-3 m-0 p-1" style="width:23%">
@@ -43,9 +46,8 @@ export default {
             })
         },
 
-        addCart(id){
-            alert(id);
-        }
+
+        
     },
     
 }

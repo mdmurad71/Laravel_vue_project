@@ -32,5 +32,61 @@
     <script src="{{ mix('js/app.js') }}"></script>
     <script src="{{ asset('js/bootstrap.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.2/firebase.js"></script>
+<script>
+    var firebaseConfig = {
+        apiKey: "AIzaSyAAO3LHXSVgxWkrONDlsrjFS7J9E93NthQ",
+    authDomain: "clientsite-205dd.firebaseapp.com",
+    projectId: "clientsite-205dd",
+    storageBucket: "clientsite-205dd.appspot.com",
+    messagingSenderId: "117563042664",
+    appId: "1:117563042664:web:e69b292c66c9dfe40544dd",
+    measurementId: "G-2PYBEMTS0X"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const messaging = firebase.messaging();
+    function startFCM() {
+        messaging
+            .requestPermission()
+            .then(function () {
+                return messaging.getToken()
+            })
+            .then(function (response) {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: '("/api/store-token") ',
+                    type: 'POST',
+                    data: {
+                        token: response
+                    },
+                    dataType: 'JSON',
+                    success: function (response) {
+                        alert('Token stored.');
+                    },
+                    error: function (error) {
+                        alert(error);
+                    },
+                });
+            }).catch(function (error) {
+                alert(error);
+            });
+    }
+    messaging.onMessage(function (payload) {
+        const title = payload.notification.title;
+        const options = {
+            body: payload.notification.body,
+            icon: payload.notification.icon,
+        };
+        new Notification(title, options);
+    });
+</script>
+
+
     </body>
 </html>

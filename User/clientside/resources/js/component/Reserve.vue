@@ -26,12 +26,12 @@
                     Please Reserve This
                 </div>
                 <div class="card-body mt-3">
-                <form> 
-                    <input type="name" id="name" class="form-control mb-4" placeholder="Name"  required="required">
-                    <input type="phone" id="phone" class="form-control mb-4" placeholder="Phone"  required="required" >                 
-                    <input type="check_in" id="cheak_in" class="form-control mb-4" placeholder="Check In"  required="required">
-                    <input type="check_out" id="check_out" class="form-control mb-4" placeholder="Check In"  required="required" >
-                    <button type="button" class="btn btn-primary btn-block" style="width: 100%;">Submit</button>
+                <form  enctype="multipart/form-data"> 
+                    <input type="name" id="name" class="form-control mb-4" placeholder="Name" v-model="form.name"  required="required">
+                    <input type="hidden" id="phone" class="form-control mb-4" placeholder="Phone" v-model="form.phone" required="required" >                 
+                    <input type="check_in" id="cheak_in" class="form-control mb-4" placeholder="Check In" v-model="form.check_in" required="required">
+                    <input type="check_out" id="check_out" class="form-control mb-4" placeholder="Check Out" v-model="form.check_out" required="required" >
+                    <button @click.prevent="reserve" type="button" class="btn btn-primary btn-block" style="width: 100%;">Submit</button>
 
                 </form>
             </div>
@@ -43,14 +43,18 @@
   
 </template>
 <script>
+
 export default {
 
-    // mounted(){
-    //         if (localStorage.getItem('phone')===null) {
-    //             let id = this.$route.params.id
-    //            this.$router.push('/login' )
-    //         } 
-    //     },
+
+
+    
+
+    mounted(){
+            if (localStorage.getItem('phone')===null) {
+               this.$router.push('/login' )
+            } 
+        },
 
 
     created() {
@@ -59,15 +63,32 @@ export default {
         	axios.get('/api/showData/'+id)
         	.then(({data}) => (this.rooms = data))
         	.catch()
+
   },  
 
     data() {
         return {
             rooms:{},
+            form:{
+                name: '',
+                phone: localStorage.getItem('phone'),
+                check_in: '',
+                check_out: '',
+            }
+
+
         }
     },
 
     methods: {
+    reserve(){
+
+        let id = this.$route.params.id;
+        let phone= localStorage.getItem('phone');
+        axios.post('/api/reserveRoom/'+id, this.form).then(res=>{
+            this.$router.push('/list')
+        }).catch()
+     },
 
 
 

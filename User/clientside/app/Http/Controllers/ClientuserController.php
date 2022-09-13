@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Clientuser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -16,11 +17,21 @@ class ClientuserController extends Controller
 ,
            ]);
 
+           $phone= $request->input('phone');
 
-        $data= array();
-        $data['name'] = $request->name;
-        $data['phone'] = $request->phone;
-        DB::table('clientuser')->insert($data);
+           $record= DB::table('clientuser')->where('phone', $phone)->first();
+
+           if($record === null){
+            $data= array();
+            $data['name'] = $request->name;
+            $data['phone'] = $request->phone;
+            DB::table('clientuser')->insert($data);
+           }else{
+            
+           }
+
+
+
 
     }
 }

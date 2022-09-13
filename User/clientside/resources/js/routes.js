@@ -7,6 +7,7 @@ import * as VueRouter from "vue-router";
 import home from './component/home'
 import login from './component/login'
 import Reserve from './component/Reserve'
+import ReserveList from './component/ReserveList'
 
 
 export const routes= [
@@ -24,6 +25,12 @@ export const routes= [
         path: '/reserve/:id',
         component: Reserve,
         name: 'reserve'
+    },
+
+    {
+        path: '/list',
+        component: ReserveList,
+        
     },
 
   

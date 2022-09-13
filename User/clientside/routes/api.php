@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClientuserController;
+use App\Http\Controllers\RoomreserveController;
 use App\Http\Controllers\RoomsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,4 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/getData', [RoomsController::class, 'getData']);
 Route::get('/showData/{id}', [RoomsController::class, 'showData']);
 Route::post('/login', [ClientuserController::class, 'login']);
-
+Route::post('/reserveRoom/{id}', [RoomreserveController::class, 'reserveRoom']);
+Route::post('/store-token', [RoomreserveController::class, 'updateDeviceToken']);
+Route::post('/send-web-notification', [RoomreserveController::class, 'sendNotification']);
+Route::get('/reserveList/{phone}', [RoomreserveController::class, 'reserveList']);
