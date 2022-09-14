@@ -17,13 +17,15 @@
                             <div class="col-lg-6 col-md-6 text-center text-green" style="color:green">
                                 <h5 class="mid">Room name: {{list.room.name}}</h5>
                                 <h5 class="mid"> price: {{list.room.price}}</h5>
+                                <h5 class="mid text-primary">Phone No: {{list.phone}}</h5>
                                 <h5 class="mid">check in: {{list.check_in}}</h5>
                                 <h5 class="mid">check out: {{list.check_out}}</h5>
 
+
                             </div>
                             <div class="col-lg-3 col-md-3 mt-3">
-                                <button  class="btn btn-danger btn-lg  text-center m-1 p-1" style="text-allign:center">Delete</button>
-                                <router-link to="/" class="btn btn-Success btn-lg text-center m-1 p-1" style="text-allign:center">Confirm</router-link>
+                                <button @click.prevent="deleteData(list.id)"  class="btn btn-danger btn-lg  text-center m-1 p-1" style="text-allign:center">Delete</button>
+                                <button @click.prevent="confirmOrder(list.id)" class="btn btn-success btn-lg text-center m-1 p-1" style="text-allign:center">Confirm</button>
 
                             </div>
 
@@ -42,6 +44,42 @@
 </template>
 <script>
 export default {
+    mounted(){
+    if (!User.loggedIn()) {
+        this.$router.push('/')
+    } 
+},
+
+
+    created() {
+            this.reserveList();
+        },
+
+    data() {
+        return {
+            lists:{}
+        }
+    },
+
+    methods: {
+        reserveList(){
+            axios.get('/api/reserveList').then(res=>{
+                this.lists= res.data;
+            }).catch();
+        },
+
+        deleteData(id){
+            axios.delete('/api/deleteRequest/'+id).then(res=>{
+                this.reserveList();
+            }).catch()
+        },
+
+        confirmOrder(id){
+            axios.post('/api/confirmOrder/'+id).then(res=>{
+                this.$router.push('/confirmList');
+            }).catch()
+        }
+    },
     
 }
 </script>

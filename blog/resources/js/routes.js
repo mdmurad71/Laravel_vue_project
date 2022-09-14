@@ -8,6 +8,9 @@ import Logout from './component/Logout';
 import Create from './Room/create';
 import Edit from './Room/edit';
 import index from './Room/index';
+import Request from './Room/request';
+import Confirm from './Room/confirmList';
+import Demo from './Room/demo';
 
 
 
@@ -48,6 +51,27 @@ export const routes= [
         path: '/edit/:id',
         component: Edit,
         name: 'edit'
+
+    },
+
+    {
+        path: '/request',
+        component: Request,
+        
+
+    },
+
+    {
+        path: '/confirmList',
+        component: Confirm,
+        
+
+    },
+
+    {
+        path: '/demo',
+        component: Demo,
+        
 
     },
    

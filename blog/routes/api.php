@@ -3,7 +3,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ConfirmReserveController;
+use App\Http\Controllers\DemoController;
 use App\Http\Controllers\RoomsController;
+use App\Http\Controllers\RoomreserveController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,3 +43,10 @@ Route::post('/upload', [RoomsController::class, 'roomUpload']);
 Route::delete('/deleteData/{id}', [RoomsController::class, 'deleteData']);
 Route::get('/showData/{id}', [RoomsController::class, 'showData']);
 Route::post('/updateRoom/{id}', [RoomsController::class, 'updateRoom']);
+Route::get('/reserveList', [RoomreserveController::class, 'reserveList']);
+Route::delete('/deleteRequest/{id}', [RoomreserveController::class, 'deleteRequest']);
+Route::post('/confirmOrder/{id}', [ConfirmReserveController::class, 'confirmOrder']);
+Route::get('/confirmList', [ConfirmReserveController::class, 'confirmList']);
+
+
+Route::post('/insertData', [DemoController::class, 'insertData']);

@@ -94,6 +94,20 @@
   </li>
 
   <li class="nav-item">
+    <router-link to="/request" class="nav-link">
+      <i class="fas fa-fw fa-chart-area"></i>
+      <span>Reserve Request List</span>
+    </router-link>
+  </li>
+
+  <li class="nav-item">
+    <router-link to="/confirmList" class="nav-link">
+      <i class="fas fa-fw fa-chart-area"></i>
+      <span>Room Confirm List</span>
+    </router-link>
+  </li>
+
+  <li class="nav-item">
     <router-link to="/logout" class="nav-link">
       <i class="fas fa-fw fa-chart-area"></i>
       <span>Logout</span>
