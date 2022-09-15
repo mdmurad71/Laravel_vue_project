@@ -1,12 +1,7 @@
 <template lang="">
     <div>
         <form @submit.prevent="insertData" enctype="multipart/form-data">
-            <input type="text" name="name" placeholder="Name" v-model="form.name"/>
-            <input type="text" name="size" placeholder="size" v-model="form.size"/>
-            <input type="text" name="maximum_occupancy" placeholder="maximum_occupancy" v-model="form.maximum_occupancy"/>
-            <input type="text" name="price" placeholder="price" v-model="form.price"/>
-            <input type="text" name="amenities" placeholder="amenities" v-model="form.amenities"/>
-            <input type="text" name="description" placeholder="description" v-model="form.description"/>
+            <input type="text" name="name" class="form-control" placeholder="Name" v-model="form.name"/>
 
             <input type="file" name="file" v-on:change="onFileselected" />
             <button type="submit" class="btn btn-primary btn-block">Submit</button>
@@ -19,13 +14,8 @@
 export default {
     data() {
         return {
-            form:{
+            form: {
                 name: null,
-                size: null,
-                maximum_occupancy: null,
-                price: null,
-                amenities: null,
-                description: null,
                 file: null
             }
         }
@@ -48,12 +38,8 @@ export default {
 
             let formData = new FormData();
             formData.append('file', this.file);
-            formData.append('name', this.name);
-            formData.append('size', this.size);
-            formData.append('maximum_occupancy', this.maximum_occupancy);
-            formData.append('price', this.price);
-            formData.append('amenities', this.amenities);
-            formData.append('description', this.description);
+            formData.append('name', this.form.name);
+
 
 
                         axios.post('/api/insertData', formData, config).then(res=>{

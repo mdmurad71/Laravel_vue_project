@@ -38,7 +38,7 @@
                     <tr v-for="room in rooms" :key="room.id">
                       <td>{{ room.name}}</td>
                       <td>{{ room.size}}</td>
-                      <td><img :src="room.photo" id="em_photo"></td>
+                      <td><img :src="room.file" id="em_photo"></td>
                       <td>{{ room.maximum_occupancy }}</td>
                       <td>{{ room.price }}</td>
                       <td>{{ room.amenities }}</td>

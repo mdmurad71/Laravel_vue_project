@@ -19782,13 +19782,13 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       form: {
-        name: '',
-        size: '',
-        maximum_occupancy: '',
-        price: '',
-        amenities: '',
-        description: '',
-        photo: ''
+        name: null,
+        size: null,
+        maximum_occupancy: null,
+        price: null,
+        amenities: null,
+        description: null,
+        file: null
       },
       amenities: {}
     };
@@ -19797,24 +19797,37 @@ __webpack_require__.r(__webpack_exports__);
     onFileselected: function onFileselected(event) {
       var _this = this;
 
-      var file = event.target.files[0];
+      this.file = event.target.files[0];
 
-      if (file.size > 1048770) {
+      if (this.file.size > 1048770) {
         Notification.image_validation();
       } else {
         var reader = new FileReader();
 
         reader.onload = function (event) {
-          _this.form.photo = event.target.result; //console.log(event.target.result);
+          _this.form.file = event.target.result; //console.log(event.target.result);
         };
 
-        reader.readAsDataURL(file);
+        reader.readAsDataURL(this.file);
       }
     },
     productInsert: function productInsert() {
       var _this2 = this;
 
-      axios.post('/api/upload', this.form).then(function () {
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+      };
+      var formData = new FormData();
+      formData.append('file', this.file);
+      formData.append('name', this.form.name);
+      formData.append('size', this.form.size);
+      formData.append('maximum_occupancy', this.form.maximum_occupancy);
+      formData.append('price', this.form.price);
+      formData.append('amenities', this.form.amenities);
+      formData.append('description', this.form.description);
+      axios.post('/api/upload', formData, config).then(function (res) {
         _this2.$router.push('/index');
       })["catch"](function (error) {});
     }
@@ -19846,11 +19859,6 @@ __webpack_require__.r(__webpack_exports__);
     return {
       form: {
         name: null,
-        size: null,
-        maximum_occupancy: null,
-        price: null,
-        amenities: null,
-        description: null,
         file: null
       }
     };
@@ -19868,12 +19876,7 @@ __webpack_require__.r(__webpack_exports__);
       };
       var formData = new FormData();
       formData.append('file', this.file);
-      formData.append('name', this.name);
-      formData.append('size', this.size);
-      formData.append('maximum_occupancy', this.maximum_occupancy);
-      formData.append('price', this.price);
-      formData.append('amenities', this.amenities);
-      formData.append('description', this.description);
+      formData.append('name', this.form.name);
       axios.post('/api/insertData', formData, config).then(function (res) {});
     }
   }
@@ -19901,13 +19904,13 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       form: {
-        name: '',
-        size: '',
-        maximum_occupancy: '',
-        price: '',
-        amenities: '',
-        description: '',
-        photo: ''
+        name: null,
+        size: null,
+        maximum_occupancy: null,
+        price: null,
+        amenities: null,
+        description: null,
+        file: null
       },
       amenities: {}
     };
@@ -19916,16 +19919,16 @@ __webpack_require__.r(__webpack_exports__);
     onFileselected: function onFileselected(event) {
       var _this = this;
 
-      var file = event.target.files[0];
+      this.file = event.target.files[0];
 
-      if (file.size > 1048770) {} else {
+      if (this.file.size > 1048770) {} else {
         var reader = new FileReader();
 
         reader.onload = function (event) {
-          _this.form.photo = event.target.result; //console.log(event.target.result);
+          _this.form.file = event.target.result; //console.log(event.target.result);
         };
 
-        reader.readAsDataURL(file);
+        reader.readAsDataURL(this.file);
       }
     },
     roomUpdate: function roomUpdate() {
@@ -20512,7 +20515,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.form.amenities]])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "file",
-    name: "file",
+    name: "photo",
     "class": "btn btn-info",
     onChange: _cache[6] || (_cache[6] = function () {
       return $options.onFileselected && $options.onFileselected.apply($options, arguments);
@@ -20520,7 +20523,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 32
   /* HYDRATE_EVENTS */
   )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-    src: $data.form.photo,
+    src: $data.form.file,
     style: {
       "height": "100px",
       "width": "200px"
@@ -20557,68 +20560,24 @@ var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-    onSubmit: _cache[7] || (_cache[7] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+    onSubmit: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.insertData && $options.insertData.apply($options, arguments);
     }, ["prevent"])),
     enctype: "multipart/form-data"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     name: "name",
+    "class": "form-control",
     placeholder: "Name",
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $data.form.name = $event;
     })
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.name]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    type: "text",
-    name: "size",
-    placeholder: "size",
-    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-      return $data.form.size = $event;
-    })
-  }, null, 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.size]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    type: "text",
-    name: "maximum_occupancy",
-    placeholder: "maximum_occupancy",
-    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-      return $data.form.maximum_occupancy = $event;
-    })
-  }, null, 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.maximum_occupancy]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    type: "text",
-    name: "price",
-    placeholder: "price",
-    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
-      return $data.form.price = $event;
-    })
-  }, null, 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.price]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    type: "text",
-    name: "amenities",
-    placeholder: "amenities",
-    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
-      return $data.form.amenities = $event;
-    })
-  }, null, 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.amenities]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    type: "text",
-    name: "description",
-    placeholder: "description",
-    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
-      return $data.form.description = $event;
-    })
-  }, null, 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.description]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.name]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "file",
     name: "file",
-    onChange: _cache[6] || (_cache[6] = function () {
+    onChange: _cache[1] || (_cache[1] = function () {
       return $options.onFileselected && $options.onFileselected.apply($options, arguments);
     })
   }, null, 32
@@ -20866,7 +20825,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 32
   /* HYDRATE_EVENTS */
   )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-    src: $data.form.photo,
+    src: $data.form.file,
     style: {
       "height": "100px",
       "width": "200px"
@@ -20981,7 +20940,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(room.size), 1
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-      src: room.photo,
+      src: room.file,
       id: "em_photo"
     }, null, 8
     /* PROPS */

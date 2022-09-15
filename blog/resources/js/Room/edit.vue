@@ -74,7 +74,7 @@
 	                <div class="col-md-6">
                     <div class="form-label-group">
 
-	                	  <img :src="form.photo" style="height:100px; width: 200px;">
+	                	  <img :src="form.file" style="height:100px; width: 200px;">
                     </div>
 	                </div>
 	             </div>
@@ -99,13 +99,13 @@ export default {
     return {
 
       form:{
-        name: '',
-        size: '',
-        maximum_occupancy: '',
-        price: '',
-        amenities: '',
-        description: '',
-        photo:''
+        name: null,
+        size: null,
+        maximum_occupancy: null,
+        price: null,
+        amenities: null,
+        description: null,
+        file:null
       },
       amenities:{},
       
@@ -114,16 +114,16 @@ export default {
 
   methods: {
 	onFileselected(event){
-        		let file=event.target.files[0];
-        		if (file.size > 1048770) {
+        		this.file=event.target.files[0];
+        		if (this.file.size > 1048770) {
         		}else{
         			let reader = new FileReader();
         			reader.onload = event => {
-        				this.form.photo = event.target.result
+        				this.form.file = event.target.result
 
         				//console.log(event.target.result);
         			};
-        			reader.readAsDataURL(file);
+        			reader.readAsDataURL(this.file);
 
         		}
         	},

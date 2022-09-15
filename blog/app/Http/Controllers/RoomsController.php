@@ -20,8 +20,8 @@ class RoomsController extends Controller
 
     public function roomUpload(Request $request){
 
-        //    $fileName = time().'.'.$request->file->getClientOriginalExtension();
-        //    $filepath= $request->file->move(public_path('upload'), $fileName);
+     
+        $filepath= $request->file->store('image', 'public');
 
            $data= array();
            $data['name']= $request->name;
@@ -30,7 +30,7 @@ class RoomsController extends Controller
            $data['price']= $request->price;
            $data['amenities']= $request->amenities;
            $data['description']= $request->description;
-        //    $data['photo']= $filepath;
+           $data['file']= $filepath;
            DB::table('rooms')->insert($data);
            return response()->json(['success'=>'You have successfully upload file.']);
 

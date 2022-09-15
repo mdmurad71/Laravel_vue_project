@@ -68,13 +68,13 @@
 
                <div class="col-md-6">
                 <div class="form-label-group">
-                 <input type="file" name="file" class="btn btn-info" @change="onFileselected">
+                 <input type="file" name="photo" class="btn btn-info" @change="onFileselected">
                 </div>
                </div>
                 <div class="col-md-6">
                   <div class="form-label-group">
 
-                    <img :src="form.photo" style="height:100px; width: 200px;">
+                    <img :src="form.file" style="height:100px; width: 200px;">
                   </div>
                 </div>
              </div>
@@ -97,13 +97,13 @@ export default {
 data() {
   return {
     form:{
-      name: '',
-      size: '',
-      maximum_occupancy: '',
-      price: '',
-      amenities: '',
-      description: '',
-      photo:''
+      name: null,
+      size: null,
+      maximum_occupancy: null,
+      price: null,
+      amenities: null,
+      description: null,
+      file: null
     },
     amenities:{},
     
@@ -111,21 +111,34 @@ data() {
 },
 methods: {
 onFileselected(event){
-          let file=event.target.files[0];
-          if (file.size > 1048770) {
+          this.file=event.target.files[0];
+          if (this.file.size > 1048770) {
             Notification.image_validation()
           }else{
             let reader = new FileReader();
             reader.onload = event => {
-              this.form.photo = event.target.result
+              this.form.file = event.target.result
               //console.log(event.target.result);
             };
-            reader.readAsDataURL(file);
+            reader.readAsDataURL(this.file);
           }
         },
           productInsert(){
-          axios.post('/api/upload',this.form)
-          .then(() => {
+            const config = {
+            headers: { 'content-type': 'multipart/form-data' }
+        }
+
+            let formData = new FormData();
+            formData.append('file', this.file);
+            formData.append('name', this.form.name);
+            formData.append('size', this.form.size);
+            formData.append('maximum_occupancy', this.form.maximum_occupancy);
+            formData.append('price', this.form.price);
+            formData.append('amenities', this.form.amenities);
+            formData.append('description', this.form.description);
+
+          axios.post('/api/upload',formData, config)
+          .then((res) => {
             this.$router.push('/index')
           })
           .catch(error => {
