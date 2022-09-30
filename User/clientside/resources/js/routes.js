@@ -17,14 +17,16 @@ export const routes= [
         component: home
     },
     {
-        path: '/login',
-        component: login
+        path: '/login/:id',
+        component: login,
+        name: 'login'
     },
 
     {
         path: '/reserve/:id',
         component: Reserve,
-        name: 'reserve'
+        name: 'reserve',
+        
     },
 
     {

@@ -21,7 +21,11 @@ class ConfirmReserveController extends Controller
         $data['check_in']=$reserve->check_in;
         $data['check_out']=$reserve->check_out;
         DB::table('cinfirm_reserve')->insert($data);
-         return response()->json("done");
+        DB::table('room_reserve')->where('id', $id)->delete();
+        return response()->json("done");
+
+
+         
 
       
         }

@@ -52,7 +52,7 @@ export default {
             axios.post('/api/login', this.form).then(res=>{
                 if(res.status===200){
                     localStorage.setItem('phone', this.form.phone);
-                    this.$router.push('/')
+                    this.$router.push({name:'reserve'})
                 }
             })
         }

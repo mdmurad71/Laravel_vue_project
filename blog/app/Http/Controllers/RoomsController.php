@@ -20,8 +20,8 @@ class RoomsController extends Controller
 
     public function roomUpload(Request $request){
 
-     
-        $filepath= $request->file->store('image', 'public');
+        $fileName = time().'.'.$request->file->getClientOriginalExtension();
+        $filepath= $request->file->move('image', $fileName);
 
            $data= array();
            $data['name']= $request->name;

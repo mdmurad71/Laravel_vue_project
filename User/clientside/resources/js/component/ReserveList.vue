@@ -12,7 +12,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-lg-3 col-md-3 justify-content-center">
-                                <img class="card-img" src="https://www.europahotelbelfast.com/wp-content/uploads/2021/12/Superior-Room-1-1366x768-fp_mm-fpoff_0_0.jpg" alt="Card image cap" style="height:100%">
+                                <img class="card-img" :src="'http://127.0.0.1:8000/'+list.room.file" alt="Card image cap" style="height:100%">
                             </div>
                             <div class="col-lg-6 col-md-6 text-center text-green" style="color:green">
                                 <h5 class="mid">Room name: {{list.room.name}}</h5>

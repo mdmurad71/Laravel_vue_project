@@ -38,13 +38,13 @@
                     <tr v-for="room in rooms" :key="room.id">
                       <td>{{ room.name}}</td>
                       <td>{{ room.size}}</td>
-                      <td><img :src="room.file" id="em_photo"></td>
+                      <td style="width:15%; height:20%"><img :src="room.file"  id="em_photo" style="width:100%; height:30%"></td>
                       <td>{{ room.maximum_occupancy }}</td>
                       <td>{{ room.price }}</td>
                       <td>{{ room.amenities }}</td>
                       <td>{{ room.description }}</td>
                       <td>
-                        <router-link :to="{name: 'edit', params:{id: room.id} }" class="btn btn-sm btn-info">Edit</router-link>
+                        <router-link :to="{name: 'edit', params:{id: room.id} }" class="btn btn-sm btn-info mb-2">Edit</router-link>
                         <a @click="deleteRoom(room.id)" class="btn btn-sm btn-danger">Delete</a>
                       </td>
                     </tr>

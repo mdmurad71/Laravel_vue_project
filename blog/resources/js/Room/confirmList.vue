@@ -29,19 +29,22 @@
                       <th>Check In</th>
                       <th>Check Out</th>
                       <th>Amenities</th>
+                      <th>Action</th>
+
                     </tr>
                   </thead>
                 
                   <tbody>
-
+                    
                     <tr v-for="list in lists" :key="list">
                       <td>{{ list.name}}</td>
                       <td>{{ list.phone }}</td>
-                      <td>{{ list.room.name}}</td>
-                      <td>{{ list.room.price }}</td>
+                      <td>{{ list.room?.name}}</td>
+                      <td>{{ list.room?.price }}</td>
                       <td>{{ list.check_in }}</td>
                       <td>{{ list.check_out }}</td>
-                      <td>{{ list.room.amenities }}</td>
+                      <td>{{ list.room?.amenities }}</td>
+                      <td><button @click="sendNotifi" class="btn btn-info">Notification</button></td>
 
                     </tr>
         
@@ -70,17 +73,26 @@ export default {
 
         data() {
             return {
-                lists:{},
+                lists:{}
                 
             }
         },
 
         methods: {
-            confirmList(){
+          confirmList(){
             axios.get('/api/confirmList').then(res=>{
                 this.lists= res.data;
+                console.log(this.lists);
             }).catch();
         },
+
+        sendNotifi(){
+          Notification.requestPermission().then(perm=>{
+            if(perm==='granted'){
+              new Notification("Thanks for Reserve");
+            }
+          })
+        }
   },
 
 

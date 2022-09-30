@@ -27,4 +27,4 @@ Route::post('/login', [ClientuserController::class, 'login']);
 Route::post('/reserveRoom/{id}', [RoomreserveController::class, 'reserveRoom']);
 Route::post('/store-token', [RoomreserveController::class, 'updateDeviceToken']);
 Route::post('/send-web-notification', [RoomreserveController::class, 'sendNotification']);
-Route::get('/reserveList/{phone}', [RoomreserveController::class, 'reserveList']);
+Route::get('/reserveList/{phone}/{token}', [RoomreserveController::class, 'reserveList']);

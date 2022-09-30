@@ -7,7 +7,7 @@
     <template v-for="room in rooms" :key="room">
         <div class="col-lg-3 col-md-3 m-0 p-1" style="width:23%">
           <div class="card h-100" >
-            <img class="card-img-top" src="https://www.europahotelbelfast.com/wp-content/uploads/2021/12/Superior-Room-1-1366x768-fp_mm-fpoff_0_0.jpg" alt="Card image cap" style="height:50%">
+            <img class="card-img-top" :src="'http://127.0.0.1:8000/'+room.file" alt="Card image cap" style="height:50%">
             <div class="card-body">
             <h5 class="card-title">{{room.name}}</h5>
             <p class="card-text">{{room.description}}</p>

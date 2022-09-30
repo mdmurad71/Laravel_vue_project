@@ -44,55 +44,103 @@
 </template>
 <script>
 
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import {onMounted, ref, reactive} from 'vue';
+import { useRoute } from 'vue-router';
+import axios from 'axios';
 export default {
 
-
-
-    
-
-    mounted(){
-            if (localStorage.getItem('phone')===null) {
-               this.$router.push('/login' )
-            } 
-        },
-
-
-    created() {
-
-   let id = this.$route.params.id
-        	axios.get('/api/showData/'+id)
-        	.then(({data}) => (this.rooms = data))
-        	.catch()
-
-  },  
-
-    data() {
-        return {
-            rooms:{},
-            form:{
+    setup() {
+        
+        const rooms= ref([]); 
+        const route = useRoute();
+        const form= reactive({
                 name: '',
                 phone: localStorage.getItem('phone'),
                 check_in: '',
                 check_out: '',
-            }
+    })
+        const firebaseConfig = {
+        apiKey: "AIzaSyAAO3LHXSVgxWkrONDlsrjFS7J9E93NthQ",
+        authDomain: "clientsite-205dd.firebaseapp.com",
+        projectId: "clientsite-205dd",
+        storageBucket: "clientsite-205dd.appspot.com",
+        messagingSenderId: "117563042664",
+        appId: "1:117563042664:web:e69b292c66c9dfe40544dd",
+        measurementId: "G-2PYBEMTS0X"
+};
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
 
 
-        }
-    },
-
-    methods: {
-    reserve(){
-
-        let id = this.$route.params.id;
-        let phone= localStorage.getItem('phone');
-        axios.post('/api/reserveRoom/'+id, this.form).then(res=>{
+        const reserve=()=>{
+        let id = route.params.id;
+        axios.post('/api/reserveRoom/'+id, form).then(res=>{
             this.$router.push('/list')
         }).catch()
-     },
+        }
+
+        const getRoomData=async()=>{
+            let id = route.params.id;
+        	let res= await axios.get('/api/showData/'+id);
+        	rooms.value= res.data;
+        }
+
+        onMounted(getRoomData());
+
+        return{
+        form,
+        rooms,
+        reserve,
+    }
+    }
+    
+
+//     mounted(){
+//             if (localStorage.getItem('phone')===null) {
+//                this.$router.push({name: 'login'})
+//             } 
+//         },
+
+        
+
+
+//     created() {
+
+//    let id = this.$route.params.id
+//         	axios.get('/api/showData/'+id)
+//         	.then(({data}) => (this.rooms = data))
+//         	.catch();
+//   },  
+
+//     data() {
+//         return {
+//             rooms:{},
+//             form:{
+//                 name: '',
+//                 phone: localStorage.getItem('phone'),
+//                 check_in: '',
+//                 check_out: '',
+//             }
+
+
+//         }
+//     },
+
+//     methods: {
+        
+//     reserve(){
+//         let id = this.$route.params.id;
+//         axios.post('/api/reserveRoom/'+id, this.form).then(res=>{
+//             this.$router.push('/list')
+//         }).catch()
+//      },
 
 
 
-    }, 
+//     }, 
 }
 </script>
 <style lang="">
